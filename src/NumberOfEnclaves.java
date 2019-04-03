@@ -32,7 +32,7 @@
  *
  * Idea:
  * Turn all land's which are walk-able from boundaries into sea.
- * Than count lands left.
+ * Then count lands left.
  *
  */
 public class NumberOfEnclaves {
