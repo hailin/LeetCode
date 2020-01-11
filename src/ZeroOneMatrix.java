@@ -52,7 +52,6 @@ public class ZeroOneMatrix {
                     matrix[nx][ny] = matrix[x][y] + 1;
                     queue.offer(nx * cols + ny);
                 }
-
             }
         }
 
