@@ -1,13 +1,15 @@
-package bfs;
+package backtrack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * 17:
- *
  * Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.
  *
  * A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+ *
  *
  *
  * Example:
@@ -35,33 +37,22 @@ public class LetterCombinationOfAPhoneNumber {
         map.put('8', "tuv");
         map.put('9', "wxyz");
 
-
-        Queue<String> queue = new LinkedList<>();
-        queue.offer("");
-
-        int step = 0;
-
-        while (step < digits.length()) {
-
-            int size = queue.size();
-
-            while (size > 0) {
-                String cur = queue.poll();
-
-                for (char c: map.get(digits.charAt(step)).toCharArray()) {
-                    queue.offer(cur + c);
-                }
-
-                size--;
-            }
-
-            step++;
-        }
-
-        while (!queue.isEmpty()) {
-            list.add(queue.poll());
-        }
-
+        backtrack(map, list, digits, "");
         return list;
+    }
+
+    private void backtrack(Map<Character, String> map, List<String> list, String digits, String cur) {
+        if (cur.length() == digits.length()) {
+            list.add(cur);
+            return;
+        }
+
+        int nextIndex = cur.length();
+        String nextLetters = map.get(digits.charAt(nextIndex));
+
+        for (int i = 0; i < nextLetters.length(); i++) {
+            char nextChar = nextLetters.charAt(i);
+            backtrack(map, list, digits, cur + nextChar);
+        }
     }
 }
